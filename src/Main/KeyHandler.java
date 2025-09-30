@@ -209,7 +209,7 @@ public class KeyHandler implements KeyListener {
         if (code == KeyEvent.VK_ESCAPE)
             gp.gameState = gp.playState;
         if (code == KeyEvent.VK_ENTER)
-            gp.player.selectItem();
+            enterPressed = true;
         if(code == KeyEvent.VK_LEFT)
             if(gp.ui.subState == 0) {
                 if (gp.ui.commandNumber == 1 && gp.music.volumeScale > 0) {
