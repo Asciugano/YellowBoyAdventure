@@ -97,7 +97,7 @@ public class Entity {
 
     public boolean stackable = false;
     public int amount = 1;
-    public static int maxAmount = 16;
+//    public static int maxAmount = 16;
 
     GamePanel gp;
 

@@ -402,8 +402,8 @@ public class Player extends Entity {
     public int searchItemInInventory(String itemName) {
         for(int i = 0; i < inventory.size(); i++) {
             if(inventory.get(i).name.equals(itemName)){
-                if(inventory.get(i).amount >= Entity.maxAmount)
-                    continue;
+//                if(inventory.get(i).amount >= Entity.maxAmount)
+//                    continue;
                 return i;
             }
         }
@@ -415,10 +415,10 @@ public class Player extends Entity {
         if(item.stackable) {
             int itemIndex = searchItemInInventory(item.name);
             if(itemIndex != -1) {
-                if(inventory.get(itemIndex).amount < Entity.maxAmount)
+//                if(inventory.get(itemIndex).amount < Entity.maxAmount)
                     inventory.get(itemIndex).amount++;
-                else
-                    inventory.add(item);
+//                else
+//                    inventory.add(item);
 
                 return true;
             } else {
