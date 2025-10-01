@@ -95,6 +95,10 @@ public class Entity {
     public int knockBackPower = 0;
     public final int type_obstacle = 8;
 
+    public boolean stackable = false;
+    public int amount = 1;
+    public static int maxAmount = 16;
+
     GamePanel gp;
 
     public Entity(GamePanel gp) {

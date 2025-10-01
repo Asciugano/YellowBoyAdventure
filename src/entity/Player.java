@@ -122,11 +122,12 @@ public class Player extends Entity {
     public void setItems() {
 
         inventory.clear();
-        inventory.add(currentWeapon);
-        inventory.add(currentShield);
+        canObtainItem(currentWeapon);
+        canObtainItem(currentShield);
 
-        inventory.add(new OBJ_Key(gp));
-        inventory.add(new OBJ_Key(gp));
+        canObtainItem(new OBJ_Key(gp));
+        canObtainItem(new OBJ_Key(gp));
+        canObtainItem(new OBJ_Key(gp));
     }
 
     public int getAttack() {
@@ -390,9 +391,52 @@ public class Player extends Entity {
             if(selectedItem.type == typeConsumable){
 
                 if(selectedItem.use(this))
-                    inventory.remove(itemIndex);
+                    if(selectedItem.amount <= 1)
+                        inventory.remove(itemIndex);
+                    else
+                        inventory.get(itemIndex).amount--;
             }
         }
+    }
+
+    public int searchItemInInventory(String itemName) {
+        for(int i = 0; i < inventory.size(); i++) {
+            if(inventory.get(i).name.equals(itemName)){
+                if(inventory.get(i).amount >= Entity.maxAmount)
+                    continue;
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+    public boolean canObtainItem(Entity item) {
+        if(item.stackable) {
+            int itemIndex = searchItemInInventory(item.name);
+            if(itemIndex != -1) {
+                if(inventory.get(itemIndex).amount < Entity.maxAmount)
+                    inventory.get(itemIndex).amount++;
+                else
+                    inventory.add(item);
+
+                return true;
+            } else {
+                if(inventory.size() < maxInventorySize) {
+                    inventory.add(item);
+
+                    return true;
+                }
+            }
+        } else {
+            if(inventory.size() < maxInventorySize) {
+                inventory.add(item);
+
+                 return true;
+            }
+        }
+
+        return false;
     }
 
     public void interactNpc(int i) {
@@ -418,12 +462,11 @@ public class Player extends Entity {
                 }
             } else {
                 String text = null;
-                if(inventory.size() < maxInventorySize){
+                if(canObtainItem(gp.obj[gp.currentMap][i])) {
+
+                    gp.playSE(1);
 
                     text = "Hai trovato: " + gp.obj[gp.currentMap][i].name + "!";
-
-                    inventory.add(gp.obj[gp.currentMap][i]);
-                    gp.playSE(1);
                     gp.obj[gp.currentMap][i] = null;
                 }
                 else {

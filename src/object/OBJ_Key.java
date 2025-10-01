@@ -11,6 +11,7 @@ public class OBJ_Key extends Entity {
         this.gp = gp;
 
         type = typeConsumable;
+        stackable = true;
         name = "Key";
         descrption = "["+ name + "]\nUna Chiave...\nchissà cosa aprirà?";
         price = 20;

@@ -13,6 +13,7 @@ public class OBJ_Potion_Red extends Entity {
         this.gp = gp;
 
         type = typeConsumable;
+        stackable = true;
         name = "Potion Red";
         value = 5;
         descrption = "[" + name + "]\nTi farà tornare un po di \nsalute";
@@ -25,8 +26,8 @@ public class OBJ_Potion_Red extends Entity {
 
         gp.gameState = gp.dialogueState;
 
-        gp.ui.currentDialogue = "Hai bevuto " + name + "\nhai recuperato " + value + " di vita";
         entity.life += value;
+        gp.ui.currentDialogue = "Hai bevuto " + name + "\nhai recuperato " + value + " di vita";
 
         gp.playSE(2);
 

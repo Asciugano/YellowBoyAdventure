@@ -433,6 +433,20 @@ public class UI {
             }
 
             g2.drawImage(entity.inventory.get(i).down1,slotX,slotY,null);
+            if(entity.inventory.get(i).amount > 1) {
+                g2.setFont(g2.getFont().deriveFont(32f));
+
+                int amountX, amountY;
+                String s = "" +  entity.inventory.get(i).amount;
+                amountX = getXForAlignToRightText(s, slotX + 44);
+                amountY = slotY + gp.tileSize;
+
+                g2.setColor(new Color(60, 60, 60));
+
+                g2.drawString(s, amountX, amountY);
+                g2.setColor(Color.white);
+                g2.drawString(s, amountX - 3, amountY - 3);
+            }
 
             slotX += slotSize;
 
@@ -759,15 +773,14 @@ public class UI {
                     gp.gameState = gp.dialogueState;
                     currentDialogue = "Ti servono piú monete per questo articolo";
                     drawDialogueScreen();
-                }
-                else if(gp.player.inventory.size() == gp.player.maxInventorySize) {
-                    subState = 0;
-                    gp.gameState = gp.dialogueState;
-                    currentDialogue = "Non puoi portare altri oggetti";
-                }
-                else {
-                    gp.player.coin -= npc.inventory.get(itemIndex).price;
-                    gp.player.inventory.add(npc.inventory.get(itemIndex));
+                } else {
+                    if(gp.player.canObtainItem(npc.inventory.get(itemIndex))) {
+                        gp.player.coin -= npc.inventory.get(itemIndex).price;
+                    } else {
+                        subState = 0;
+                        gp.gameState = gp.dialogueState;
+                        currentDialogue = "Non puoi portare altri oggetti";
+                    }
                 }
             }
         }
@@ -808,7 +821,10 @@ public class UI {
                 }
                 else {
                     gp.player.coin += gp.player.inventory.get(itemIndex).price / 2;
-                    gp.player.inventory.remove(itemIndex);
+                    if(gp.player.inventory.get(itemIndex).amount > 1)
+                        gp.player.inventory.get(itemIndex).amount--;
+                    else
+                        gp.player.inventory.remove(itemIndex);
                 }
             }
         }
