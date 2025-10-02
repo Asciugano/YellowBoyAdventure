@@ -9,6 +9,15 @@ public class Lightning {
 
     GamePanel gp;
     BufferedImage darknessFilter;
+    public int dayCounter;
+    public float filterAlpha = 0f;
+
+    public final int day = 0;
+    public final int dusk = 1;
+    public final  int night = 2;
+    public final int dawn = 3;
+
+    public int dayState = day;
 
     public Lightning(GamePanel gp) {
         this.gp = gp;
@@ -16,7 +25,9 @@ public class Lightning {
     }
 
     public void draw(Graphics2D g2) {
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, filterAlpha));
         g2.drawImage(darknessFilter, 0, 0, null);
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1f));
     }
 
     public void setLightSource() {
@@ -70,6 +81,42 @@ public class Lightning {
         if(gp.player.lightUpdated) {
             setLightSource();
             gp.player.lightUpdated = false;
+        }
+
+        if(dayState == day) {
+             dayCounter++;
+
+             if(dayCounter > 6000) {
+                 dayState = dusk;
+                 dayCounter = 0;
+             }
+        }
+
+        if(dayState == dusk) {
+            filterAlpha += 0.0001f;
+
+            if(filterAlpha > 1f) {
+                filterAlpha = 1;
+                dayState = night;
+            }
+        }
+
+        if(dayState == night) {
+            dayCounter++;
+
+            if(dayCounter > 4000) {
+                dayState = dawn;
+                dayCounter = 0;
+            }
+        }
+
+        if(dayState == dawn) {
+            filterAlpha -= 0.0001f;
+
+            if(filterAlpha < 0f) {
+                filterAlpha = 0f;
+                dayState = day;
+            }
         }
     }
 }

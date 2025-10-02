@@ -626,4 +626,17 @@ public class Player extends Entity {
         entity.speed += knockBackPower;
         entity.knockBack = true;
     }
+
+    public void getSleepingImage(BufferedImage image) {
+        up1 = image;
+        up2 = image;
+        down1 = image;
+        down2 = image;
+        left1 = image;
+        left2 = image;
+        right1 = image;
+        right2 = image;
+
+
+    }
 }

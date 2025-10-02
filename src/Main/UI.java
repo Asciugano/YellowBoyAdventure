@@ -1,6 +1,7 @@
 package Main;
 
 import entity.Entity;
+import enviorment.Lightning;
 import object.OBJ_Coin_Bronze;
 import object.OBJ_Heart;
 import object.OBJ_ManaCrystal;
@@ -127,6 +128,9 @@ public class UI {
         }
         if(gp.gameState == gp.tradeSate) {
             drawTradeScreen();
+        }
+        if(gp.gameState == gp.sleepState) {
+            drawSleepScreen();
         }
 
         /*if(gameFinished) {
@@ -972,4 +976,26 @@ public class UI {
         }
     }
 
+    public void drawSleepScreen() {
+        counter++;
+
+        if(counter < 120) {
+            gp.eManager.lightning.filterAlpha += 0.01f;
+            if(gp.eManager.lightning.filterAlpha > 1f)
+                gp.eManager.lightning.filterAlpha = 1f;
+        }
+
+        if(counter >= 120) {
+            gp.eManager.lightning.filterAlpha -= 0.01f;
+            if(gp.eManager.lightning.filterAlpha < 0) {
+                gp.eManager.lightning.filterAlpha = 0;
+                counter = 0;
+                gp.eManager.lightning.dayCounter = 0;
+
+                gp.eManager.lightning.dayState = gp.eManager.lightning.day;
+                gp.gameState = gp.playState;
+                gp.player.getPlayerImage();
+            }
+        }
+    }
 }
