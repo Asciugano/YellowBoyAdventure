@@ -57,6 +57,7 @@ public class Entity {
     public int coin;
     public Entity currentWeapon;
     public Entity currentShield;
+    public Entity currentLight;
 
     public ArrayList<Entity> inventory = new ArrayList<>();
     public final int maxInventorySize = 20;
@@ -94,10 +95,12 @@ public class Entity {
     int knockBackCounter = 0;
     public int knockBackPower = 0;
     public final int type_obstacle = 8;
+    public final int type_light = 9;
 
     public boolean stackable = false;
     public int amount = 1;
 //    public static int maxAmount = 16;
+    public int lightRadius;
 
     GamePanel gp;
 

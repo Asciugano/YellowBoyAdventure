@@ -16,6 +16,7 @@ public class Player extends Entity {
 
     public boolean attackCancelled = false;
     //public int hasKey = 0;
+    public boolean lightUpdated = false;
 
     int standCounter = 0;
 
@@ -395,6 +396,14 @@ public class Player extends Entity {
                         inventory.remove(itemIndex);
                     else
                         inventory.get(itemIndex).amount--;
+            }
+            if(selectedItem.type == type_light) {
+                if(currentLight == selectedItem) {
+                    currentLight = null;
+                } else {
+                    currentLight = selectedItem;
+                }
+                lightUpdated = true;
             }
         }
     }

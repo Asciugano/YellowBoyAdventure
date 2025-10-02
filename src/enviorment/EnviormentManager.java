@@ -13,10 +13,15 @@ public class EnviormentManager {
     }
 
     public void setup() {
-        lightning = new Lightning(gp, 350);
+        lightning = new Lightning(gp);
     }
 
     public void draw(Graphics2D g2) {
-        lightning.draw(g2);
+        if(lightning != null)
+            lightning.draw(g2);
+    }
+
+    public void update() {
+        lightning.update();
     }
 }

@@ -218,6 +218,7 @@ public class GamePanel extends JPanel implements Runnable {
         if (gameState == pauseState) {
             //nothing
         }
+        eManager.update();
     }
 
     public void drawToScreen() {
