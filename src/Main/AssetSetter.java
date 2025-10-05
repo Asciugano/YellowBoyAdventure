@@ -52,13 +52,13 @@ public class AssetSetter {
         gp.npc[mapNum][i].worldX = gp.tileSize * 21;
         gp.npc[mapNum][i].worldY = gp.tileSize * 21;
         i++;
-//
-//        mapNum = 1;
-//        i = 0;
-//        gp.npc[mapNum][i] = new NPC_Merchant(gp);
-//        gp.npc[mapNum][i].worldX = gp.tileSize * 12;
-//        gp.npc[mapNum][i].worldY = gp.tileSize * 7;
-//        i++;
+
+        mapNum = 1;
+        i = 0;
+        gp.npc[mapNum][i] = new NPC_Merchant(gp);
+        gp.npc[mapNum][i].worldX = gp.tileSize * 52;
+        gp.npc[mapNum][i].worldY = gp.tileSize * 46;
+        i++;
     }
 
     public void setMonster() {
@@ -130,8 +130,6 @@ public class AssetSetter {
         gp.iTile[mapNum][i] = new IT_DryTree(gp, 62, 58);
         i++;
         gp.iTile[mapNum][i] = new IT_DryTree(gp, 66, 63);
-        i++;
-        gp.iTile[mapNum][i] = new IT_DryTree(gp, 66, 62);
         i++;
         gp.iTile[mapNum][i] = new IT_DryTree(gp, 66, 62);
         i++;

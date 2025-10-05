@@ -53,13 +53,11 @@ public class EventHandler {
         }
 
         if (canTouchEvent) {
-            if (hit(27, 16, "right", 0)) damagePit(gp.dialogueState);
-            else if (hit(23, 19, "any", 0)) damagePit(gp.dialogueState);
-            else if (hit(23, 12, "any", 0)) healingPool(gp.dialogueState);
-            else if (hit(23, 7, "down", 0)) teleport(gp.dialogueState);
-            else if(hit(10, 39, "any", 0)) teleport(1, 12, 13);
-            else if(hit(12, 13, "any", 1)) teleport(0,10, 39);
-            else if(hit(12, 9, "up",1)) speak(gp.npc[1][0]);
+            if (hit(45, 60, "any", 0)) damagePit(gp.dialogueState);
+            else if (hit(44, 53, "any", 0)) healingPool(gp.dialogueState);
+            else if(hit(74, 61, "any", 0)) teleport(1, 52, 52);
+            else if(hit(52, 52, "any", 1)) teleport(0,74, 61);
+            else if(hit(52, 48, "up",1)) speak(gp.npc[1][0]);
         }
     }
 
